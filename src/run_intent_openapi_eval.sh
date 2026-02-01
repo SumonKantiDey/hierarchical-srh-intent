@@ -1,4 +1,4 @@
-python3 -m src.run_intent \
+python3 -m src.run_intent_openapi \
   --input_file "data/hinglish/final_jmir_data/cleaned_data_for_jmir.xlsx" \
   --output_file "output/gpt-5.json" \
   --model "openai/gpt-5" \

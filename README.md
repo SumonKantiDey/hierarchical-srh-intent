@@ -3,11 +3,13 @@ This project frames Sexual and Reproductive Health (SRH) intent understanding as
 
 ### 🔬 Method Overview ###
 <p align="center"><img src="./figures/method.png" alt="Model Architecture" width="500"/></p>
+
 Queries are classified using a predefined intent hierarchy covering major SRH domains.
 
 ### 🤖 Models Evaluated
 All models were accessed via the OpenRouter API, with the exception of `sarvam-m`, which was accessed directly through the Sarvam AI platform.
 
+Models were accessed via the OpenRouter API, the Sarvam AI platform (`sarvam-m`), and local GPU-based inference for selected Indic open-weight models. All models were evaluated using identical prompts and inference settings to enable fair comparison.
 
 ####  Proprietary models
 - ```openai/gpt-4o```
@@ -21,9 +23,14 @@ All models were accessed via the OpenRouter API, with the exception of `sarvam-m
 - ```google/gemma-3-27b-it```
 - ```qwen/qwen-2.5-7b-instruct```
 - ```mistralai/mixtral-8x7b-instruct```
-- ```sarvam-m```
+- ```CohereLabs/aya-expanse-8b```
 
-All models are evaluated using identical prompts and inference settings to enable fair comparison.
+#### Indic open-weight models
+- ```ai4bharat/Airavata```
+- ```Cognitive-Lab/LLama3-Gaja-Hindi-8B-v0.1```
+- ```GenVRadmin/AryaBhatta-GemmaGenZ-Vikas-Merged```
+- ```krutrim-ai-labs/Krutrim-2-instruct``` 
+- ```sarvam-m```
 
 ### 📁 Repository Structure ###
 - `./confidence_intervals` - Scripts and notebooks for confidence interval estimation.
@@ -44,12 +51,13 @@ $ pip install -r requirements.txt
 $ cp .env.example .env
 ```
 
-
 ### ▶️ Running Model Inference 
-The run_intent.py script performs hierarchical intent classification for a single model specified via command-line arguments.
+- ```run_intent_openapi.py``` – API-based models (OpenRouter and Sarvam AI)
+- ```run_intent_indic.py``` – Locally executed Indic open-weight models
 
+#### API-based inference 
 ```bash
-python3 -m src.run_intent \
+python3 -m src.run_intent_openapi \
   --input_file "" \
   --output_file "" \
   --model "" \
@@ -57,15 +65,29 @@ python3 -m src.run_intent \
   --sleep 2 \
   --max_rows 100
 ```
+#### Local inference
+```bash
+python3 -m src.run_intent_indic \
+  --input_file "" \
+  --output_file "" \
+  --model "" \
+  --max_retries 3 \
+  --sleep 2 \
+  --max_rows 100
+```
+> Note: The local GPU script requires a CUDA-enabled environment and sufficient GPU memory.
 
 ### 📊 Batch Evaluation
-
-To run experiments across multiple models and random seeds, use the provided shell script:
+Batch experiments are executed using the following scripts:
 ```bash
-chmod +x src/eval.sh
-src/eval.sh
+chmod +x src/run_intent_openapi_eval.sh
+src/run_intent_openapi_eval.sh
+
+chmod +x src/run_intent_indic_eval.sh
+src/run_intent_indic_eval.sh
 ```
-This script internally calls ```run_intent.py``` for each configured model.
+Each script internally calls inference script (`run_intent_openapi.py` or `run_intent_indic.py`) for the configured set of models.
+
 
 > ⚠️ Make sure you have appropriate API keys stored in the ```.env``` file or have a local setup for each LLM.
 
