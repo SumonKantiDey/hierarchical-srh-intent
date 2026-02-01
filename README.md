@@ -2,7 +2,15 @@
 This project frames Sexual and Reproductive Health (SRH) intent understanding as a two-level hierarchical classification task (topic → subtopic) and evaluates a diverse set of proprietary and open-weight LLMs under a unified experimental setup.
 
 ### 🔬 Method Overview ###
-<p align="center"><img src="./figures/method.png" alt="Model Architecture" width="500"/></p>
+<p align="center">
+  <img src="./figures/SRHIntent_Fig.png"
+       alt="Hierarchical SRH intent classification framework"
+       width="900"/>
+</p>
+<p align="center">
+  <em>Figure: Hierarchical intent classification pipeline for code-mixed SRH queries.</em>
+</p>
+
 
 Queries are classified using a predefined intent hierarchy covering major SRH domains.
 
