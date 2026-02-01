@@ -61,14 +61,11 @@ python3 -m src.run_intent \
 ### 📊 Batch Evaluation
 
 To run experiments across multiple models and random seeds, use the provided shell script:
-
-### Model Evaluation ### 
-Train and evaluate **PLM-based** models across multiple random seeds using the following scripts:
 ```bash
 chmod +x src/eval.sh
 src/eval.sh
 ```
-This script internally calls run_intent.py for each configured model.
+This script internally calls ```run_intent.py``` for each configured model.
 
 > ⚠️ Make sure you have appropriate API keys stored in the ```.env``` file or have a local setup for each LLM.
 
