@@ -12,8 +12,6 @@ This project frames Sexual and Reproductive Health (SRH) intent understanding as
 </p>
 
 ### 🤖 Models Evaluated
-All models were accessed via the OpenRouter API, with the exception of `sarvam-m`, which was accessed directly through the Sarvam AI platform.
-
 Models were accessed via the OpenRouter API, the Sarvam AI platform (`sarvam-m`), and local GPU-based inference for selected Indic open-weight models. All models were evaluated using identical prompts and inference settings to enable fair comparison.
 
 ####  Proprietary models
